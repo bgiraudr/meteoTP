@@ -2,12 +2,12 @@ var app = angular.module("MeteoTP", ["ngRoute"]);
 app.config(function($routeProvider) {
   $routeProvider
   .when("/", {
-    templateUrl : "../partials/meteoville.html"
+    templateUrl : "partials/meteovilles.html"
   })
   .when("/previsions", {
-    templateUrl : "../partials/previsions.html"
+    templateUrl : "partials/previsions.html"
   })
   .when("/villes", {
-    templateUrl : "../partials/villes.html"
+    templateUrl : "partials/villes.html"
   });
 });
