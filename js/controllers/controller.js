@@ -1,29 +1,48 @@
-var villes = ["Vannes", "Paris"];
+var villes = [
+  {"name" : "Vannes", "id" : 1},
+  {"name" : "Paris", "id" : 2}
+]
+
+var icon_meteo = {
+  "Thunderstorm":"wi-day-lightning",
+  "Drizzle":"wi-day-sleet",
+  "Rain":"wi-day-rain",
+  "Snow":"wi-day-snow",
+  "Clouds":"wi-cloud",
+  "Clear":"wi-day-clear"
+}
 
 var app = angular.module("mainCtrl", []);
 app.controller("homeCtrl", function ($scope, $http) {
 
-  let city = villes[0];
+  for(let i of villes) {
+    let api = "http://api.openweathermap.org/data/2.5/weather?q=" + i.name;
+    api += "&units=metric";
+    api += "&lang=fr";
+    api += "&APPID=ee07e2bf337034f905cde0bdedae3db8";
 
-  let api = "http://api.openweathermap.org/data/2.5/weather?q=" + city;
-  api += "&units=metric";
-  api += "&lang=fr";
-  api += "&APPID=ee07e2bf337034f905cde0bdedae3db8";
+    var req = {
+      method: 'GET',
+      url: api,
+    }
 
-  var req = {
-    method: 'GET',
-    url: api,
+    $http(req).then(function(response) {
+      console.log(response.data);
+      i["temps"] = response.data["weather"][0]["description"];
+      i["temp"] = response.data["main"]["temp"];
+      i["humid"] =  response.data["main"]["humidity"];
+      i["vent"] = response.data["wind"]["speed"];
+      i["orient"] = response.data["wind"]["deg"];
+
+      let icon = icon_meteo[response.data["weather"][0]["main"]];
+      if(response.data["weather"][0]["icon"].includes('n')) {
+        icon = icon.replace("day", "night");
+      }
+      i["icon"] = icon;
+    })
   }
 
-  $http(req).then(function(response) {
-    console.log(response.data);
-    $scope.nomVille = response.data["name"];
-    $scope.temps = response.data["weather"][0]["description"];
-    $scope.temp = response.data["main"]["temp"];
-    $scope.humid = response.data["main"]["humidity"];
-    $scope.vent = response.data["wind"]["speed"];
-    $scope.orient = response.data["wind"]["deg"];
-  })
+  $scope.villes = villes;
 });
 
 app.controller("prevision", function ($scope, $http) {
