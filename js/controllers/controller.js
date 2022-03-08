@@ -1,8 +1,4 @@
-var villes = [
-  {"name" : "Vannes", "id" : 1},
-  {"name" : "Paris", "id" : 2},
-  {"name" : "Las Vegas", "id" : 3}
-]
+var villes = []
 
 var icon_meteo = {
   "Thunderstorm":"wi-day-lightning",
@@ -17,6 +13,8 @@ var api_key = "ee07e2bf337034f905cde0bdedae3db8";
 
 var app = angular.module("mainCtrl", []);
 app.controller("homeCtrl", function ($scope, $http) {
+
+  villes = JSON.parse(localStorage['villes']);
 
   for(let i of villes) {
     let api = "http://api.openweathermap.org/data/2.5/weather?q=" + i.name;
@@ -45,78 +43,78 @@ app.controller("homeCtrl", function ($scope, $http) {
   }
 
   $scope.villes = villes;
+
+  $scope.delete = function(id) {
+    villes.splice(id-1,1);
+    localStorage["villes"] = JSON.stringify(villes);
+  }
 });
 
+app.controller("prevision", function ($scope, $http, $route, $window) {
+  if($route.current.params.id == undefined) {
+    $window.location.href = "#";
+  } else {
+    villes = JSON.parse(localStorage['villes']);
+    let villeid = villes[$route.current.params.id-1];
+    console.log(villeid);
+    //find the city depends of the id
 
-
-app.controller("prevision", function ($scope, $http, $route) {
-  let id = $route.current.params.id;
-  let villeid;
-  for(let i of villes) {
-    if(i.id == id) {
-      villeid = i;
-      break;
-    }
-  }
-
-  $scope.ville = villeid.name;
-
-  //get the lat ; long of the city
-  let api = "http://api.openweathermap.org/data/2.5/weather?q=" + villeid.name;
-  api += "&APPID=" + api_key;
-
-  let lat, lon;
-
-  let req = {
-    method: 'GET',
-    url: api,
-  };
-
-  let previsions = []
-
-  $http(req).then(function(response) {
-    lon = response.data.coord.lon;
-    lat = response.data.coord.lat;
-
-    //get the daily prevision
-    
-    api = "https://api.openweathermap.org/data/2.5/onecall?";
-    api += "lat=" + lat;
-    api += "&lon=" + lon;
-    api += "&units=metric";
-    api += "&exclude=current,minutely,hourly,alerts"
+    $scope.ville = villeid.name;
+    //get the lat ; long of the city
+    let api = "http://api.openweathermap.org/data/2.5/weather?q=" + villeid.name;
     api += "&APPID=" + api_key;
 
-    req = {
+    let lat, lon;
+    let req = {
       method: 'GET',
       url: api,
-    }
+    };
 
+    let previsions = []
+    //get the lat/long position of the city
     $http(req).then(function(response) {
-      for(let i = 1; i < response.data.daily.length; i++) {
-        let day = response.data.daily[i];
-        let icon = icon_meteo[day["weather"][0]["main"]];
-        if(day["weather"][0]["icon"].includes('n')) {
-          icon = icon.replace("day", "night");
-        }
+      lon = response.data.coord.lon;
+      lat = response.data.coord.lat;
 
-        let date = new Date(day["dt"]*1000).toLocaleDateString("fr-FR");
-        dict = {
-          "date":date,
-          "icon":icon,
-          "tempmax":day["temp"]["max"],
-          "tempmin":day["temp"]["min"],
-        };
-        previsions.push(dict);
+      //get the 7 day prevision
+      api = "https://api.openweathermap.org/data/2.5/onecall?";
+      api += "lat=" + lat;
+      api += "&lon=" + lon;
+      api += "&units=metric";
+      api += "&exclude=current,minutely,hourly,alerts"
+      api += "&APPID=" + api_key;
+
+      req = {
+        method: 'GET',
+        url: api,
       }
 
-      $scope.previsions = previsions;
-    });
-  });
+      $http(req).then(function(response) {
+        for(let i = 1; i < response.data.daily.length; i++) {
+          let day = response.data.daily[i];
+          let icon = icon_meteo[day["weather"][0]["main"]];
+          if(day["weather"][0]["icon"].includes('n')) {
+            icon = icon.replace("day", "night");
+          }
 
-  
+          let date = new Date(day["dt"]*1000).toLocaleDateString("fr-FR");
+          dict = {
+            "date":date,
+            "icon":icon,
+            "tempmax":day["temp"]["max"],
+            "tempmin":day["temp"]["min"],
+          };
+          previsions.push(dict);
+        }
+        $scope.previsions = previsions;
+      });
+    });
+  }
 });
 
 app.controller("villes", function ($scope, $http) {
-  console.log("villes")
+  $scope.add = function() {
+    villes.push({"name" : $scope.nomville, "id" : villes.length+1});
+    localStorage["villes"] = JSON.stringify(villes);
+  };
 });

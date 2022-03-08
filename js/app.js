@@ -12,5 +12,6 @@ app.config(function($routeProvider) {
   .when("/villes", {
     templateUrl : "partials/villes.html",
     controller : "villes"
-  });
+  })
+  .otherwise({redirectTo: "/"});
 });

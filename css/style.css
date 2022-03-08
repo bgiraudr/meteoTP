@@ -2,3 +2,13 @@
   color: orangered;
   font-size: 30px;
 }
+
+.card-title > a {
+  color: white;
+}
+
+.card-title > a:hover {
+  cursor: pointer;
+  color: orange;
+  text-decoration: underline;
+}

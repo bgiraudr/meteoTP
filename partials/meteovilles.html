@@ -11,12 +11,15 @@
 		    <div class="col s12 m3">
 				<div class="card blue-grey darken-1">
 					<div class="card-content white-text">
-						<span class="card-title">{{ville.name}}</span>
+						<span class="card-title">
+							<a href="#!previsions/?id={{ville.id}}">{{ville.name}}</a>
+						</span>
 						<i class="wi {{ville.icon}}"></i>
 						<p>Temps : {{ville.temps}}</p>
 						<p>Température : {{ville.temp}}°C</p>
 						<p>Humidité : {{ville.humid}} %</p>
 						<p>Vent : {{ville.vent}}, {{ville.orient}}°</p>
+						<button ng-click="delete(ville.id)">(X)</button>
 					</div>
 				</div>
 	    	</div>
