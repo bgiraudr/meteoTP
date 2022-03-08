@@ -13,15 +13,42 @@
 	<script src="js/controllers/controller.js"></script>
 	
 	<link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="css/weather-icons.css"/>
 	<link rel="stylesheet" href="css/style.css"/>
 
 </head>
 <body>
-	<p><a href="#">Main</a></p>
-	<a href="#!villes">Villes</a>
-	<a href="#!previsions">Previsions</a>
 
-	<div class="ng-view"></div>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#" class="brand-logo right">Logo</a>
+			<ul id="nav-mobile" class="left">
+				<li><a href="#">Accueil</a></li>
+				<li><a href="#!villes">Ajouter</a></li>
+				<li><a href="#!previsisons">Prévisions</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<main>
+		<div class="ng-view"></div>
+	</main>
+
+	<footer class="page-footer">
+		<div class="container">
+			<div class="row">
+				<div class="center-align">
+					<h5 class="white-text">TP météo</h5>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				© GIRAUD-RENARD - JEZO
+				<a class="grey-text text-lighten-4 right" href="https://people.irisa.fr/Nicolas.Le_Sommer/ens/M4103C/">Lien TP</a>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

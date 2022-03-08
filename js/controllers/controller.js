@@ -45,7 +45,8 @@ app.controller("homeCtrl", function ($scope, $http) {
   $scope.villes = villes;
 
   $scope.delete = function(id) {
-    villes.splice(id-1,1);
+    console.log(id);
+    villes.splice(id,1);
     localStorage["villes"] = JSON.stringify(villes);
   }
 });
@@ -56,7 +57,6 @@ app.controller("prevision", function ($scope, $http, $route, $window) {
   } else {
     villes = JSON.parse(localStorage['villes']);
     let villeid = villes[$route.current.params.id-1];
-    console.log(villeid);
     //find the city depends of the id
 
     $scope.ville = villeid.name;
@@ -114,7 +114,28 @@ app.controller("prevision", function ($scope, $http, $route, $window) {
 
 app.controller("villes", function ($scope, $http) {
   $scope.add = function() {
-    villes.push({"name" : $scope.nomville, "id" : villes.length+1});
-    localStorage["villes"] = JSON.stringify(villes);
+    //check if the city exists
+    
+    let api = "http://api.openweathermap.org/geo/1.0/direct?limit=1&q=" + $scope.nomville;
+    api += "&appid=" + api_key;
+
+    let req = {
+        method: 'GET',
+        url: api,
+    }
+
+    $http(req).then(function(response) {
+      if(response.data[0] != undefined) {
+        if(response.data[0]["name"].toUpperCase() == $scope.nomville.toUpperCase()) {
+          villes.push({"name" : $scope.nomville, "id" : villes.length+1});
+          localStorage["villes"] = JSON.stringify(villes);
+          M.toast({html: $scope.nomville + " ajouté !", classes: 'green rounded'});
+        } else {
+          M.toast({html: $scope.nomville + " non trouvée...", classes: 'red rounded'});
+        }
+      } else {
+          M.toast({html: $scope.nomville + " non trouvée...", classes: 'red rounded'});
+      }
+    })
   };
 });
