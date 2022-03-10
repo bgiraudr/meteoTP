@@ -11,9 +11,11 @@
 
 	<script src="js/app.js"></script>
 	<script src="js/controllers/controller.js"></script>
+	<script src="https://kit.fontawesome.com/3784ecec13.js" crossorigin="anonymous"></script>
 	
 	<link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Manrope">
 	<link rel="stylesheet" href="css/weather-icons.css"/>
 	<link rel="stylesheet" href="css/style.css"/>
 
@@ -21,12 +23,11 @@
 <body>
 
 	<nav>
-		<div class="nav-wrapper">
-			<a href="#" class="brand-logo right">Logo</a>
+		<div class="nav-wrapper indigo lighten-1">
+			<a href="#" class="brand-logo right"><i class="fa-solid fa-sun fa-spin fa-xl" style="--fa-animation-duration: 15s;"></i></a>
 			<ul id="nav-mobile" class="left">
 				<li><a href="#">Accueil</a></li>
 				<li><a href="#!villes">Ajouter</a></li>
-				<li><a href="#!previsisons">Prévisions</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -35,11 +36,11 @@
 		<div class="ng-view"></div>
 	</main>
 
-	<footer class="page-footer">
+	<footer class="page-footer indigo lighten-1">
 		<div class="container">
 			<div class="row">
 				<div class="center-align">
-					<h5 class="white-text">TP météo</h5>
+					<h5 class="white-text">TP météo <i class="fa-solid fa-sun fa-spin" style="--fa-animation-duration: 15s;"></i></h5>
 				</div>
 			</div>
 		</div>

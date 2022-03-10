@@ -9,6 +9,14 @@ var icon_meteo = {
   "Clear":"wi-day-clear"
 }
 
+var week = [
+  "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
+]
+
+var month = [
+  "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"
+]
+
 var api_key = "ee07e2bf337034f905cde0bdedae3db8";
 
 var app = angular.module("mainCtrl", []);
@@ -39,13 +47,18 @@ app.controller("homeCtrl", function ($scope, $http) {
         icon = icon.replace("day", "night");
       }
       i["icon"] = icon;
+
+      //only for "more" button
+      i["min"] = response.data["main"]["temp_min"];
+      i["max"] = response.data["main"]["temp_max"];
+      i["feel"] = response.data["main"]["feels_like"];
+      i["pressure"] = response.data["main"]["pressure"];
     })
   }
 
   $scope.villes = villes;
 
   $scope.delete = function(id) {
-    console.log(id);
     villes.splice(id,1);
     localStorage["villes"] = JSON.stringify(villes);
   }
@@ -97,7 +110,8 @@ app.controller("prevision", function ($scope, $http, $route, $window) {
             icon = icon.replace("day", "night");
           }
 
-          let date = new Date(day["dt"]*1000).toLocaleDateString("fr-FR");
+          let date = new Date(day["dt"]*1000);
+          date = week[date.getDay()] + ' ' + date.getDate() + ' ' + month[date.getMonth()];
           dict = {
             "date":date,
             "icon":icon,
@@ -113,8 +127,11 @@ app.controller("prevision", function ($scope, $http, $route, $window) {
 });
 
 app.controller("villes", function ($scope, $http) {
+  villes = JSON.parse(localStorage['villes']);
+  
+  $scope.previsions = villes;
   $scope.add = function() {
-    //check if the city exists
+    //check if the city exist
     
     let api = "http://api.openweathermap.org/geo/1.0/direct?limit=1&q=" + $scope.nomville;
     api += "&appid=" + api_key;

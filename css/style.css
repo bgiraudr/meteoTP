@@ -1,3 +1,7 @@
+html {
+  font-family:'Manrope';
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -8,19 +12,22 @@ main {
   flex: 1 0 auto;
 }
 
-.wi {
-  color: orangered;
+.icon {
+  color: #e39b25;
   font-size: 30px;
 }
 
-.card-title > a {
-  color: white;
+.title, .title_prevision{
+  color: black;
+  font-size: x-large;
 }
 
-.card-title > a:hover {
+.title:hover {
   cursor: pointer;
-  color: orange;
+  color: gray;
   text-decoration: underline;
 }
 
-.supprimer
+.card-content {
+  color: gray;
+}

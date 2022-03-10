@@ -7,10 +7,32 @@
 </head>
 <body>
 	<h1>Villes</h1>
-	<form>
-		<input type="text" ng-model="nomville">
-		<button ng-click="add()">Ajouter</button>
-	</form>
+
+	<div class="row">
+		<div class="col s6">
+		    <form class="col s6">
+				<div class="row">
+					<div class="input-field col s6">
+						<i class="material-icons prefix">mode_edit</i>
+						<textarea id="icon_prefix2" class="materialize-textarea" ng-model="nomville"></textarea>
+						<label for="icon_prefix2">Nom ville</label>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div ng-repeat="jour in previsions">
+		    <div class="col s6 m1">
+				<div class="card cyan lighten-5">
+					<div class="card-content">
+						<span class="title_prevision">{{jour.name}}</span>
+					</div>
+				</div>
+	    	</div>
+	    </div>
+
+	</div>
+	<a class="waves-effect waves-light btn" ng-click="add()">Ajouter</a>
 </body>
 </html>
 
