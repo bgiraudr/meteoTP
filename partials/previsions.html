@@ -6,21 +6,22 @@
 	<title></title>
 </head>
 <body>
-	<h2>Prévisions 7 jours pour {{ville}}</h2>
-
     <div class="row">
-		<div ng-repeat="jour in previsions">
-		    <div class="col s12 m3">
-				<div class="card cyan lighten-5">
-					<div class="card-content">
-						<span class="title_prevision">{{jour.day}} {{jour.date}}<i class="wi {{jour.icon}} icon right"></i></span>
-						
-						<p>Min : {{jour.tempmin}}°C</p>
-						<p>Max : {{jour.tempmax}}°C</p>
+    	<div class="col s10 offset-s1">
+    		<h2 class="center">Prévisions 7 jours pour {{ville}}</h2>
+			<div ng-repeat="jour in previsions">
+			    <div class="col s4">
+					<div class="card cyan lighten-5">
+						<div class="card-content">
+							<span class="title_prevision">{{jour.day}} {{jour.date}}<i class="wi {{jour.icon}} icon right"></i></span>
+							
+							<p>Min : {{jour.tempmin}}°C</p>
+							<p>Max : {{jour.tempmax}}°C</p>
+						</div>
 					</div>
-				</div>
-	    	</div>
-	    </div>
+		    	</div>
+		    </div>
+		</div>
 	</div>
 
 

@@ -10,6 +10,8 @@ var app = angular.module("mainCtrl", []);
 app.controller("homeCtrl", function ($scope, $http) {
   villes = JSON.parse(localStorage.villes);
 
+  if(villes.length == 0) $scope.titre = "Aucune ville renseignée";
+
   for(let i of villes) {
     let req = {
       method: 'GET',
@@ -46,7 +48,7 @@ app.controller("prevision", function ($scope, $http, $route, $window) {
   if($route.current.params.id == undefined) {
     $window.location.href = "#";
   } else {
-    let villeid = JSON.parse(localStorage.villes)[$route.current.params.id-1];
+    let villeid = JSON.parse(localStorage.villes)[$route.current.params.id];
 
     let req = {
       method: 'GET',
@@ -71,7 +73,6 @@ app.controller("prevision", function ($scope, $http, $route, $window) {
 
 app.controller("villes", function ($scope, $http) {
   villes = JSON.parse(localStorage.villes);
-  
   $scope.previsions = villes;
   $scope.add = function() {
     let req = {
@@ -91,6 +92,13 @@ app.controller("villes", function ($scope, $http) {
       } else {
         M.toast({html: $scope.nomville + " non trouvée...", classes: 'red rounded'});
       }
+    }, function(response) {
+      M.toast({html: "Le champ est vide", classes: 'red rounded'});
     })
   };
+
+  $scope.delete = function(id) {
+    villes.splice(id,1);
+    localStorage.villes = JSON.stringify(villes);
+  }
 });

@@ -6,33 +6,34 @@
 	<title></title>
 </head>
 <body>
-	<h1>Villes</h1>
-
 	<div class="row">
-		<div class="col s6">
-		    <form class="col s6">
-				<div class="row">
-					<div class="input-field col s6">
-						<i class="material-icons prefix">mode_edit</i>
-						<textarea id="icon_prefix2" class="materialize-textarea" ng-model="nomville"></textarea>
-						<label for="icon_prefix2">Nom ville</label>
-					</div>
+		<div class="col s4 offset-s1">
+			<h2 class="center">Ajouter</h2>
+		    <form class="col s12">
+				<div class="input-field">
+					<i class="material-icons prefix">mode_edit</i>
+					<input id="icon_prefix2" type="text" class="validate" ng-model="nomville" required></input>
+					<label for="icon_prefix2">Nom ville</label>
 				</div>
+				<input type="submit" class="btn col s12" ng-click="add()"></input>
 			</form>
 		</div>
 
-		<div ng-repeat="jour in previsions">
-		    <div class="col s6 m1">
+		<div class="col s5 offset-s1">
+			<h2 class="center">Villes actuelles</h2>
+			<div ng-repeat="jour in previsions track by $index">
 				<div class="card cyan lighten-5">
 					<div class="card-content">
 						<span class="title_prevision">{{jour.name}}</span>
+						<a ng-click="delete($index)" class="btn-floating waves-effect waves-light red right">
+							<i class="fa-solid fa-trash-can"></i>
+						</a>
 					</div>
 				</div>
 	    	</div>
 	    </div>
-
 	</div>
-	<a class="waves-effect waves-light btn" ng-click="add()">Ajouter</a>
+	
 </body>
 </html>
 

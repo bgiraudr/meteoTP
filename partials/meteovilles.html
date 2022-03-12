@@ -7,12 +7,15 @@
 </head>
 <body>
 	<div class="row">
+		<div class="col s10 offset-s1">
+		<h2 class="center">{{titre}}</h2>
 		<div ng-repeat="ville in villes track by $index">
 		    <div class="col s12 m3">
+
 				<div class="card cyan lighten-5">
 
 					<div class="card-content">
-						<a href="#!previsions/?id={{ville.id}}" class="title">{{ville.name}}</a><i class="icon wi right {{ville.icon}}"></i>
+						<a href="#!previsions/?id={{$index}}" class="title">{{ville.name}}</a><i class="icon wi right {{ville.icon}}"></i>
 
 						<p>Temps : {{ville.temps}}</p>
 						<p>Température : {{ville.temp}}°C</p>
@@ -40,5 +43,6 @@
 	    	</div>
 	    </div>
 	</div>
+</div>
 </body>
 </html>
