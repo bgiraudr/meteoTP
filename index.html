@@ -1,9 +1,15 @@
+<!-- 
+	GIRAUD-RENARD Benjamin
+	JEZO Henri
+-->
+
 <!DOCTYPE html>
+<!-- main app -->
 <html ng-app="MeteoTP">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
+	<title>Météo Ville</title>
 
 	<script src="node_modules/angular/angular.js"></script>
 	<script src="node_modules/angular-route/angular-route.js"></script>
@@ -11,10 +17,13 @@
 
 	<script src="js/app.js"></script>
 	<script src="js/controllers/controller.js"></script>
+	<!-- add fontawesome kit -->
 	<script src="https://kit.fontawesome.com/3784ecec13.js" crossorigin="anonymous"></script>
 	
+	<!-- add materialize -->
 	<link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- add custom font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Manrope">
 	<link rel="stylesheet" href="css/weather-icons.css"/>
 	<link rel="stylesheet" href="css/style.css"/>
@@ -22,8 +31,10 @@
 </head>
 <body>
 
+	<!-- top navigation bar -->
 	<nav>
 		<div class="nav-wrapper indigo lighten-1">
+			<!-- rotating button using fontawesome kit -->
 			<a href="#" class="brand-logo right"><i class="fa-solid fa-sun fa-spin fa-xl" style="--fa-animation-duration: 15s;"></i></a>
 			<ul id="nav-mobile" class="left">
 				<li><a href="#">Accueil</a></li>
@@ -32,6 +43,7 @@
 		</div>
 	</nav>
 
+	<!-- main with animated background and the ng-view -->
 	<main>
 		<div class="bg"></div>
 		<div class="bg bg2"></div>
@@ -39,6 +51,7 @@
 		<div class="ng-view"></div>
 	</main>
 
+	<!-- the footer -->
 	<footer class="page-footer indigo lighten-1">
 		<div class="container">
 			<div class="row">

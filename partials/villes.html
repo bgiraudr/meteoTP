@@ -1,30 +1,40 @@
+<!-- 
+	GIRAUD-RENARD Benjamin
+	JEZO Henri
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
+	<title>Ajouter</title>
 </head>
 <body>
+	<!-- split the page in 2 big col -->
 	<div class="row">
 		<div class="col s4 offset-s1">
 			<h2 class="center">Ajouter</h2>
+			<!-- create the form to add -->
 		    <form class="col s12">
 				<div class="input-field">
 					<i class="material-icons prefix">mode_edit</i>
 					<input id="icon_prefix2" type="text" class="validate" ng-model="nomville" required></input>
 					<label for="icon_prefix2">Nom ville</label>
 				</div>
+				<!-- on click on the button -> call to add() function on the controller -->
 				<input type="submit" class="btn col s12" ng-click="add()"></input>
 			</form>
 		</div>
 
+		<!-- list of all cities -->
 		<div class="col s5 offset-s1">
 			<h2 class="center">Villes actuelles</h2>
-			<div ng-repeat="jour in previsions track by $index">
+			<div ng-repeat="ville in curr_villes track by $index">
 				<div class="card cyan lighten-5">
 					<div class="card-content">
-						<span class="title_prevision">{{jour.name}}</span>
+						<span class="title_prevision">{{ville.name}}</span>
+						<!-- delete a city -->
 						<a ng-click="delete($index)" class="btn-floating waves-effect waves-light red right">
 							<i class="fa-solid fa-trash-can"></i>
 						</a>
@@ -33,7 +43,6 @@
 	    	</div>
 	    </div>
 	</div>
-	
 </body>
 </html>
 

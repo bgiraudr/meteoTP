@@ -1,4 +1,7 @@
+/*Custom CSS for the apps*/
+
 html {
+  /*use a different google font*/
   font-family:'Manrope';
 }
 
@@ -12,6 +15,7 @@ main {
   flex: 1 0 auto;
 }
 
+/*weather icons*/
 .icon {
   color: #e39b25;
   font-size: 30px;
@@ -32,6 +36,7 @@ main {
   color: gray;
 }
 
+/*background animation*/
 .bg {
   animation:slide 3s ease-in-out infinite alternate;
   background-image: linear-gradient(-60deg, #e0f7fa 50%, #d0dffa 50%);

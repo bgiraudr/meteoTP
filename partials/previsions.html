@@ -1,18 +1,25 @@
+<!-- 
+	GIRAUD-RENARD Benjamin
+	JEZO Henri
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
+	<title>Prévisions</title>
 </head>
 <body>
     <div class="row">
     	<div class="col s10 offset-s1">
     		<h2 class="center">Prévisions 7 jours pour {{ville}}</h2>
+    		<!-- loop for each day in previsions -->
 			<div ng-repeat="jour in previsions">
 			    <div class="col s4">
 					<div class="card cyan lighten-5">
 						<div class="card-content">
+							<!-- display the informations + icon -->
 							<span class="title_prevision">{{jour.day}} {{jour.date}}<i class="wi {{jour.icon}} icon right"></i></span>
 							
 							<p>Min : {{jour.tempmin}}°C</p>
@@ -23,7 +30,5 @@
 		    </div>
 		</div>
 	</div>
-
-
 </body>
 </html>
